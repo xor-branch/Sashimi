@@ -1,0 +1,10 @@
+
+<%=render 'layouts/task'%>
+<div class="container">
+<h3>Tasks List</h3>
+  <%@tasks.each do |task|%>
+    <div class="task_list">
+      <%=link_to " #{task.name}", task_path(task.id),:class=>"fas fa-folder-open"%>
+    </div>
+  <% end %>
+</div>
