@@ -1,24 +1,31 @@
-# README
+# App schema
+### Model : Task
+"Task.new(task_name:string task_details:text task_statut:string task_priority:string)"
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+belongs_to:user
+has_many:labels
 
-Things you may want to cover:
+| Colums | Description |
+| --- | ----------- |
+| task_name | string |
+| task_detail | string |
+| task_statut | string |
+| task_priority | string |
 
-* Ruby version
+### Model User
+"User.new(name:string email:string password_digest:string image:text)"
+has_many:tasks
+| Colums | Description |
+| --- | ----------- |
+| name | string |
+| email | string |
+| image | text |
+| password_digest | string |
 
-* System dependencies
+### Model label
+"Label.new(label_name:string)"
+has_many:tasks
+| Colums | Description |
+| --- | ----------- |
+| name | string |
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
