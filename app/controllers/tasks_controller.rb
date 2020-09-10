@@ -25,13 +25,14 @@ class TasksController < ApplicationController
   def update
     if @task.update(task_params)
       flash[:success] = 'Task successfully update !'
-      redirect_to task_path(@task.id)
+      redirect_to tasks_path
     else
       render :edit
     end
   end
   def destroy
     @task.destroy
+    flash[:success] = 'Task successfully destroy !'
     redirect_to tasks_path
   end
 private
