@@ -1,0 +1,24 @@
+
+  <% if @task.errors.any? %>
+  <div id="error_explanation">
+    <h2>
+      <%= pluralize(@task.errors.count, "error") %> prohibited
+      this article from being saved:
+    </h2>
+    <ul>
+      <% @task.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+<% end %>
+  <div class="field">
+    <%= form_with(model:@task,local: true) do |form| %>
+        <%= form.text_field :name %>
+        <br>
+        <br>
+        <%= form.text_area :content %>
+        <br>
+        <br>
+        <%= form.submit%>
+    <% end %>
+</div>
