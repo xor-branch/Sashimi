@@ -30,17 +30,22 @@ has_many:tasks
 | name | string |
 
 # Heroku deployement 
-###"loggin to heroku"
-[] $ heroku login
-###"conmpile the assets of projet, verify to be in the projet repositoring"
-[] $ rails assets:precompile RAILS_ENV=production
-###"push the projet in github, verify the repositoring exist on github"
-[] $ git add -A 
-[] $ $ git commit -m "projet commit"
-###"create the application on heroku"
-[] $ heroku create
-###"Add Heroku build pack"
-[] $ heroku buildpacks:set heroku/ruby
-[] $ heroku buildpacks:add --index 1 heroku/nodejs
-###"deply to heroku"
-[]$ git push heroku master 
+"loggin to heroku"
+<code> $ heroku login</code>
+
+"conmpile the assets of projet, verify to be in the projet repositoring"
+<code>$ rails assets:precompile RAILS_ENV=production</code>
+
+"push the projet in github, verify the repositoring exist on github"
+<code> $ git add -A</code>
+<code> $ git commit -m "projet commit"</code>
+
+"create the application on heroku"
+<code>$ heroku create
+  
+"Add Heroku build pack"
+<code>$ heroku buildpacks:set heroku/ruby</code>
+<code> $ heroku buildpacks:add --index 1 heroku/nodejs</code>
+
+"deply to heroku"
+<code>$ git push heroku master </code>
