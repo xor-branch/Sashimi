@@ -49,3 +49,6 @@ has_many:tasks
 
 "deply to heroku"
 <code>$ git push heroku master </code>
+
+"Migrate database"
+<code>$ heroku run rails db:migrate </code>
