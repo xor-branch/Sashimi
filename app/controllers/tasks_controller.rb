@@ -2,6 +2,7 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   PER = 4
   def index
+
     #@statut = params[:statu].to_i
     if params[:sort_expired]
       @tasks=Task.all.order(end_time: :desc).page(params[:page]).per(4)
@@ -14,6 +15,7 @@ class TasksController < ApplicationController
     else
       @tasks=Task.all.order(created_at: :desc).page(params[:page]).per(4)
     end
+
   end
   def new
     @task = Task.new

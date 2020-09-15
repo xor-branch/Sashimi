@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :task do
+ factory :task do
    name { 'Task1' }
    content { 'content1' }
    end_time { '2020-05-01' }
@@ -13,4 +13,5 @@ FactoryBot.define do
    priority { 'medium' }
    statut { 'completed' }
  end
+
 end

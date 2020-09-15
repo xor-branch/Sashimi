@@ -66,6 +66,7 @@ RSpec.describe 'Task Management Function', type: :system do
 
     context 'If you click on Sort by end time' do
       it 'Tasks are arranged in descending order by end time' do
+
         visit tasks_path
         click_on 'deadilne'
         task_list = all('.task_row')
@@ -73,6 +74,17 @@ RSpec.describe 'Task Management Function', type: :system do
         expect(task_list[1]).to have_content 'Task1'
       end
     end
+    context 'When tasks are arranged in descending order of creation date and time' do
+      it 'New task is displayed at the top' do
+        task = FactoryBot.create(:task, name:'title1', content:'content1')
+        task = FactoryBot.create(:task, name:'title2', content:'content2')
+        visit tasks_path
+        task_list = all('.task_list')
+        expect(task_list[0]).to have_content 'title2'
+        expect(task_list[1]).to have_content 'title1'
+        #expect(page).to have_content 'task'
+      end
+   end
   end
 
   describe 'Task List screen' do
