@@ -7,4 +7,6 @@ class Task < ApplicationRecord
   enum statut: %i[not_started started completed]
   enum priority: %i[high medium low]
 
+  scope :name_search,  -> (text_serach) {where("name LIKE ?", "%#{text_serach}%")}
+  scope :status_search,  -> (text_serach) {where(status: text_serach)}
 end
