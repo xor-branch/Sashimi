@@ -1,3 +1,36 @@
 // Place all the styles related to the tasks controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+a{
+  color:red;
+}
+a:hover{
+  text-decoration: none;
+  color:blue;
+}
+.search{
+  margin: 5px;
+}
+.task_list_header{
+  background-color: #152ddf;
+}
+.pagination span a{
+  padding: 4px;
+  color: black;
+
+}
+.pagination{
+  margin-left: 50%;
+}
+footer {
+  width: 100%;
+  //background-color:#0C74C3;
+  padding: 10px 0 5px 0;
+  color: black;
+  margin: auto;
+  padding-bottom: 2px;
+  font-size: 12px;
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+}

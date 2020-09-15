@@ -1,10 +1,27 @@
+<%=render 'layouts/top'%>
 
-<%=render 'layouts/task'%>
-<div class="container">
-<h3>Tasks List</h3>
-  <%@tasks.each do |task|%>
-    <div class="task_list">
-      <%=link_to " #{task.name}", task_path(task.id),:class=>"fas fa-folder-open"%>
-    </div>
-  <% end %>
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col" >Task name</th>
+      <th scope="col"><%=link_to "deadilne", tasks_path(sort_expired: "true"), :class=>"fas fa-sort-down"%></th>
+      <th scope="col">Statut</th>
+      <th scope="col"><%=link_to "priority", tasks_path(sort_priority: "true"),:class=>"fas fa-sort-down"%></th>
+    </tr>
+  </thead>
+  <tbody>
+      <%@tasks.each do |task|%>
+    <tr>
+      <td><%=link_to "#{task.name}", task_path(task.id)%></td>
+      <td><%=task.end_time%></td>
+      <td><%=task.statut%></td>
+      <td><%=task.priority%></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<div class="page">
+  <%= paginate @tasks %>
 </div>
+<%=render 'layouts/footer'%>
