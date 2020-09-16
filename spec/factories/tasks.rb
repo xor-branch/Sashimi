@@ -13,5 +13,4 @@ FactoryBot.define do
    priority { 'medium' }
    statut { 'completed' }
  end
-
 end

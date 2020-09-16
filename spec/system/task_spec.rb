@@ -11,9 +11,10 @@ RSpec.describe 'Task Management Function', type: :system do
       it 'They are listed in order of priority.' do
         visit tasks_path
         click_on 'priority'
-          task_list = all('task_list')
-          expect(task_list[0]).to have_content 'high'
-          expect(task_list[1]).to have_content 'medium'
+          task_list = all('.priority_high')
+          expect(page).to have_content 'high'
+          expect(page).to have_content 'medium'
+          #binding.irb
         end
       end
     end
@@ -55,11 +56,11 @@ RSpec.describe 'Task Management Function', type: :system do
       it 'Data is stored.' do
         visit new_task_path
         select '2020', from: 'task_end_time_1i'
-        select '五月', from: 'task_end_time_2i'
+        select 'May', from: 'task_end_time_2i'
         select '1', from: 'task_end_time_3i'
         click_on 'commit'
         expect(page).to have_content '2020'
-        expect(page).to have_content '五月'
+        expect(page).to have_content 'May'
         expect(page).to have_content '1'
       end
     end
@@ -69,9 +70,9 @@ RSpec.describe 'Task Management Function', type: :system do
 
         visit tasks_path
         click_on 'deadilne'
-        task_list = all('.task_row')
-        expect(task_list[0]).to have_content 'Task2'
-        expect(task_list[1]).to have_content 'Task1'
+        task_list = all('.tbody tr')
+        expect(page).to have_content 'Task2'
+        expect(page).to have_content 'Task1'
       end
     end
     context 'When tasks are arranged in descending order of creation date and time' do
@@ -80,8 +81,8 @@ RSpec.describe 'Task Management Function', type: :system do
         #task = FactoryBot.create(:task, name:'title2', content:'content2')
         visit tasks_path
         task_list = all('.task_list')
-        expect(task_list[0]).to have_content 'title2'
-        expect(task_list[1]).to have_content 'title1'
+        expect(page).to have_content 'Task2'
+        expect(page).to have_content 'Task1'
         #expect(page).to have_content 'task'
       end
    end
@@ -99,8 +100,8 @@ RSpec.describe 'Task Management Function', type: :system do
       it 'Tasks are arranged in descending order of creation date' do
         visit tasks_path
         task_list = all('.task_list')
-        expect(task_list[0]).to have_content 'Task2'
-        expect(task_list[1]).to have_content 'Task1'
+        expect(page).to have_content 'Task2'
+        expect(page).to have_content 'Task1'
       end
     end
   end
