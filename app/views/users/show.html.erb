@@ -1,12 +1,12 @@
-<%= render 'layouts/user_top' %>
+<%= render 'layouts/search' %>
   <table class="table">
     <thead class="thead-dark">
       <tr>
         <th>Name</th>
         <th>Content</th>
-        <th>End time</th>
+        <th>end time</th>
         <th>Priority</th>
-        <th>Status</th>
+        <th>Statut</th>
         <th colspan="3"></th>
       </tr>
     </thead>
@@ -19,7 +19,7 @@
           <td class="date_row"><%= task.end_time %></td>
           <td class="priority_high"><%= task.priority %></td>
           <td><%= task.statut %></td>
-          <td><%= link_to '', edit_task_path(task),:class=>"far fa-edit" %></td>
+          <td><%= link_to '', edit_task_path(task),:class=>"fas fa-pencil-alt" %></td>
           <td><%= link_to '', task, method: :delete, data: { confirm: 'Are you sure?' },:class=>"far fa-trash-alt"%></td>
           <% end %>
         </tr>

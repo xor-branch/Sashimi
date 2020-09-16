@@ -19,7 +19,7 @@
       <h3>name : <%=@task.name%></h3>
     <p>détail :<%=@task.content%></p>
 
-    <span class="task_action"><%= link_to ' edit', edit_task_path(@task.id),:class=>"far fa-edit" %></span>
+    <span class="task_action"><%= link_to ' edit', edit_task_path(@task.id),:class=>"fas fa-pencil-alt" %></span>
     <span class="task_action"><%= link_to ' delete', task_path(@task.id), method: :delete, data: { confirm: 'Are you sure?' },:class=>"far fa-trash-alt"%></span>
 </div>
 <%=render 'layouts/footer'%>
