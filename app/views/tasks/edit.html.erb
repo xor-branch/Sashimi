@@ -1,5 +1,23 @@
-<%=render 'layouts/task'%>
-<div class="container">
-<h3>add new task</h3>
-  <%= render 'form'%>
+<div class="user_top">
+  <h4><%= current_user.name %></h4>
+  <p><em><%= current_user.email %></em></p>
+  <%if logged_in? || current_user.id == @user.id %>
+    <div class="action">
+      <div class="left">
+        <span class=""><%=link_to "#{current_user.name} task list",user_path(current_user.id) %></span>
+      </div>
+      <div class="right">
+        <%if current_user.admin? %>
+        <span class=""><%=link_to "user list",admin_users_path %></span>
+        <%end%>
+      </div>
+    </div>
+  <%end%>
 </div>
+<div class="container">
+  <div class="container loggin_form">
+    <h2>create new task</h2>
+    <%=render 'form' %>
+  </div>
+</div>
+<%=render 'layouts/footer'%>
