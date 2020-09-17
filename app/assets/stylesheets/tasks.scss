@@ -40,7 +40,7 @@ footer {
   height: 100%;
   //border: 1px solid black;
   border-radius: 10px;
-  margin-top: 10%;
+  margin-top: 5%;
   margin-bottom: 10px;
   box-shadow: 5px 5px 5px 5px #F1F4E8;
   padding-bottom: 15px;
@@ -68,7 +68,7 @@ footer {
   position: relative;
     margin-top: 0px;
   background-color: #F1F4E8;
-  background: image-url("backgroung.jpg");
+  background: image-url("background.jpg");
   padding: 40px;
   border: 2px solid white;
 }
@@ -83,11 +83,11 @@ footer {
 }
 .user_top .action .right {
   padding-top: 10px;
-  float:right;
+  //float:right;
 }
 .user_top .action .left {
   padding-top: 10px;
-  float:left;
+  //float:left;
 }
 .user_top .action .right span{
   margin-bottom: 20px;
@@ -107,7 +107,7 @@ footer {
   height: 100%;
   //border: 1px solid black;
   border-radius: 10px;
-  margin-top: 5%;
+  margin-top: 7%;
   margin-bottom: 10px;
   box-shadow: 5px 5px 5px 5px #F1F4E8;
   padding-bottom: 10px;
@@ -145,5 +145,5 @@ footer {
   padding-left: 10px;
 }
 .nav-top {
-  margin-left: 30%;
+  margin-left: 35%;
 }

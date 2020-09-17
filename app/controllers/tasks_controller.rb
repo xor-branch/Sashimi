@@ -5,20 +5,15 @@ class TasksController < ApplicationController
   PER = 4
   def index
     if params[:sort_expired]
-      @tasks = current_user.tasks.all.order(end_time: :desc).page(params[:page]).per(4)
+      @tasks=current_user.tasks.all.order(end_time: :desc).page(params[:page]).per(4)
     elsif params[:sort_priority]
-      @tasks = current_user.tasks.all.order(priority: :desc).page(params[:page]).per(4)
+      @tasks=current_user.tasks.all.order(priority: :desc).page(params[:page]).per(4)
+    elsif params[:name].blank? && params[:statut]
+      @tasks = current_user.tasks.where(statut:params[:statut]).page(params[:page]).per(4)
+    elsif params[:name] && params[:statut]
+      @tasks = current_user.tasks.where(name: params[:name]).where(statut:params[:statut]).page(params[:page]).per(4)
     else
       @tasks=current_user.tasks.all.order(created_at: :desc).page(params[:page]).per(4)
-    end
-    if params[:search].present?
-      if params[:name].present? && params[:status].present?
-        @tasks = current_user.tasks.name_search(params[:name]).status_search(params[:status]).page(params[:page]).per(4)
-      elsif params[:name].present?
-        @tasks = current_user.tasks.name_search(params[:name]).page(params[:page]).per(4)
-      elsif params[:status].present?
-        @tasks = current_user.tasks.status_search(params[:status]).page(params[:page]).per(4)
-      end
     end
   end
   def new
@@ -43,7 +38,7 @@ class TasksController < ApplicationController
   def update
     if @task.update(task_params)
       flash[:success] = 'Task successfully update !'
-      redirect_to user_path(current_user.id)
+      redirect_to admin_users_path
     else
       render :edit
     end
@@ -51,7 +46,7 @@ class TasksController < ApplicationController
   def destroy
     @task.destroy
     flash[:success] = 'Task successfully destroy !'
-    redirect_to user_path(current_user.id)
+    redirect_to admin_users_path
   end
 private
   def task_params

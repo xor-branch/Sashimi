@@ -1,9 +1,15 @@
 require 'rails_helper'
-
+require 'selenium-webdriver'
 RSpec.describe 'Task Management Function', type: :system do
   before do
-    FactoryBot.create(:task)
-    FactoryBot.create(:second_task)
+    FactoryBot.create(:user)
+    FactoryBot.create(:admin_user)
+    FactoryBot.create(:task, @user)
+    FactoryBot.create(:second_task, @user)
+    visit new_session_path
+    fill_in 'session[email]', with: @user.email
+    fill_in 'session[password]', with: @user.password
+    click_button 'Log in'
   end
 
   describe 'Reordering by Priority' do

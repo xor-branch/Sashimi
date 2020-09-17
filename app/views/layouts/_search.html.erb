@@ -1,18 +1,21 @@
 <div class="user_top">
+  <%if logged_in? || current_user.id == @user.id %>
+  <div class="action">
+    <div class="left">
+      <span class=""><%=link_to "",edit_user_path(current_user.id),:class=>"fas fa-user-edit" %></span>
+      <span class=""><%=link_to " ",user_path(current_user.id),method: :delete, data: { confirm: 'Are you sure?'} ,:class=>"far fa-trash-alt" %></span>
+      <span class=""><%=link_to "logout",session_path(current_user.id),method: :delete, data: { confirm: 'Are you sure?'} %></span>
+    </div>
+    <div class="right">
+      <%if current_user.admin? %>
+      <span class=""><%=link_to "users list",admin_users_path %></span>
+      <span class=""><%= link_to "create new user", new_admin_user_path %></span>
+      <%end%>
+    </div>
+  </div>
+  <%end%>
   <h4><%= current_user.name %></h4>
   <p><em><%= current_user.email %></em></p>
-  <%if logged_in? || current_user.id == @user.id %>
-    <div class="action">
-      <div class="left">
-        <span class=""><%=link_to "#{current_user.name} task list",user_path(current_user.id) %></span>
-      </div>
-      <div class="right">
-        <%if current_user.admin? %>
-        <span class=""><%=link_to "user list",admin_users_path %></span>
-        <%end%>
-      </div>
-    </div>
-  <%end%>
   <div class="search">
     <%= form_with(url: tasks_path, method: :get, local: true) do |f| %>
       <%= f.label(:name, 'name') %>

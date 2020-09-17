@@ -8,9 +8,12 @@ class UsersController < ApplicationController
   def create
     @user=User.new(user_params)
     if @user.save
+      unless current_user.admin?
       session[:user_id] = @user.id
+      else
+        redirect_to admin_users_path
+      end
       flash[:success]="account created successfull"
-      redirect_to new_session_path
     else
       flash[:danger]="something is wrong !"
       render :new
@@ -44,6 +47,6 @@ class UsersController < ApplicationController
   end
 
   def login_check
-    redirect_to user_path(current_user.id), notice:('you are are already logged') if logged_in?
+    redirect_to user_path(current_user.id), notice:('you are already logged') if logged_in?
   end
 end
