@@ -19,6 +19,7 @@ module Sashimi
         g.helper false
         g.jbuilder false
         g.test_framework :rspec,
+                    fixtures:true,
                    model_specs: true,
                    view_specs: false,
                    helper_specs: false,
