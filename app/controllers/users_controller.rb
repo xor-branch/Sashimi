@@ -11,12 +11,14 @@ class UsersController < ApplicationController
   def create
     @user=User.new(user_params)
     if @user.save
-      unless current_user.admin?
-      session[:user_id] = @user.id
-      else
+      if logged_in?
         redirect_to admin_users_path
-      end
+        flash[:success]="account created successfull"
+      else
+      session[:user_id] = @user.id
+      redirect_to users_path
       flash[:success]="account created successfull"
+    end
     else
       flash[:danger]="something is wrong !"
       render :new
