@@ -10,6 +10,7 @@
         <%if current_user.admin? %>
         <span class=""><%=link_to "users list",admin_users_path %></span>
         <span class=""><%= link_to "create new user", new_admin_user_path %></span>
+        <span class=""><%= link_to "admin tasks", user_path(current_user.id) %></span>
         <%end%>
       </div>
     </div>
