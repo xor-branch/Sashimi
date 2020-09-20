@@ -4,7 +4,6 @@
       <div class="left">
         <span class=""><%=link_to "",edit_user_path(current_user.id),:class=>"fas fa-user-edit" %></span>
         <span class=""><%=link_to " ",user_path(current_user.id),method: :delete, data: { confirm: 'Are you sure?'} ,:class=>"far fa-trash-alt" %></span>
-        <span class=""><%=link_to "logout",session_path(current_user.id),method: :delete, data: { confirm: 'Are you sure?'} %></span>
       </div>
       <div class="right">
         <%if current_user.admin? %>
@@ -19,6 +18,8 @@
     <br>
     <h4><%= current_user.name %></h4>
     <p><em><%= current_user.email %></em></p>
+   <%=link_to "logout",session_path(current_user.id),method: :delete, data: { confirm: 'Are you sure?'} %>
+
   </div>
 </div>
 
@@ -39,7 +40,7 @@
                 <td><%= user.admin %></td>
                 <td><%= user.tasks.count %></td>
                 <td><%= link_to "", edit_admin_user_path(user),:class=>"fas fa-user-edit" %></td>
-                <td><%= link_to "", admin_user_path(user), method: :delete, data: { confirm: 'are you sure ?' },:class=>"far fa-trash-alt" %></td>
+                <td><%= link_to "destroy", admin_user_path(user), method: :delete, data: { confirm: 'are you sure ?' },:class=>"far fa-trash-alt" %></td>
             </tr>
         <% end %>
         <tr>

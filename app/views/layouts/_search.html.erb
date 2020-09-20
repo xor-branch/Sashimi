@@ -4,7 +4,6 @@
     <div class="left">
       <span class=""><%=link_to "",edit_user_path(current_user.id),:class=>"fas fa-user-edit" %></span>
       <span class=""><%=link_to " ",user_path(current_user.id),method: :delete, data: { confirm: 'Are you sure?'} ,:class=>"far fa-trash-alt" %></span>
-      <span class=""><%=link_to "logout",session_path(current_user.id),method: :delete, data: { confirm: 'Are you sure?'} %></span>
     </div>
     <div class="right">
       <%if current_user.admin? %>
@@ -16,12 +15,14 @@
   <%end%>
   <h4><%= current_user.name %></h4>
   <p><em><%= current_user.email %></em></p>
+  <%=link_to 'logout',session_path(current_user.id),method: :delete, data: { confirm: 'Are you sure?'} %>
   <div class="search">
     <%= form_with(url: tasks_path, method: :get, local: true) do |f| %>
       <%= f.label(:name, 'name') %>
       <%= f.text_field :name %>
       <%= f.label:statut %>
-      <%= f.select :statut, [ ["not_started", 0 ], ["started", 1 ], ["completed", 2 ] ]%>
+      <%= f.select :statut, [["not_started", 0 ], ["started", 1 ], ["completed", 2 ] ], include_blank: "veuillez choisir"%>
+      <%= f.hidden_field :search, value: 'true' %>
       <%= f.submit'search',:class=>"btn btn-dark" %>
     <% end %>
   </div>

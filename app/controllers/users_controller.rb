@@ -31,7 +31,11 @@ class UsersController < ApplicationController
   def update
     if @user.update(user_params)
       flash[:success]="Post update"
-      redirect_to user_path(current_user.id)
+      if current_user.admin?
+        redirect_to admin_users_path
+      else
+        redirect_to user_path(current_user.id)
+      end
     else
       render :new
     end
