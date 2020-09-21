@@ -93,6 +93,19 @@ RSpec.describe 'User registration, login and logout functions', type: :system do
         expect(current_path).to eq admin_users_path
         expect(page).to have_content'test3'
       end
+      it 'get error if register the same email address for 2 users' do
+        visit new_session_path
+        fill_in 'session[email]', with: @admin_user.email
+        fill_in 'session[password]', with: @admin_user.password
+        click_button 'Log in'
+        visit new_admin_user_path
+        fill_in 'user[name]', with: 'user'
+        fill_in 'user[email]', with: 'user@gmail.com'
+        fill_in 'user[password]', with: '000000'
+        fill_in 'user[password_confirmation]', with: '000000'
+        click_button 'Create User'
+        expect { raise StandardError, 'Email has already been taken'}.to raise_error('Email has already been taken')
+      end
       it "Testing that gives administrators access to the user's details" do
         visit new_session_path
         fill_in 'session[email]', with: @admin_user.email
