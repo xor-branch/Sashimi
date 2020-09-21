@@ -16,7 +16,7 @@ class Admin::UsersController < ApplicationController
       flash[:success] = 'user are successfully create'
       redirect_to (admin_users_path)
     else
-      flash[:notice] = 'oO something wrong'
+      flash[:danger] = 'oO something wrong'
       render :new
     end
   end
@@ -25,13 +25,36 @@ class Admin::UsersController < ApplicationController
   end
   def edit
   end
+  def update
+    if @user.update(user_params)
+      flash[:success]="user update"
+      if current_user.admin?
+        redirect_to admin_users_path
+      else
+        redirect_to user_path(current_user.id)
+      end
+    else
+      if current_user.admin?
+        flash[:danger] = 'you are currently the only administrator. Please choose another administrator before'
+        render :new
+      else
+        flash[:danger] = 'oO something wrong'
+        render :new
+      end
+    end
+  end
   def destroy
     if @user.destroy
       flash[:success] = 'user are successfully destroy'
       redirect_to (admin_users_path)
     else
-      flash[:success] = 'oO something wrong'
-      redirect_to admin_users_path
+      if current_user.admin?
+        flash[:danger] = 'you are currently the only administrator. Please choose another administrator before'
+        redirect_to admin_users_path
+      else
+        flash[:danger] = 'oO something wrong'
+        redirect_to admin_users_path
+      end
     end
   end
 private

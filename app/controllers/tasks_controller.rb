@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
-  before_action :login_check, only: [:index, :new, :edit, :destroy]
+  before_action :login_check, only: [:index,:show, :new, :edit, :destroy]
   before_action :user_check, only:[:show, :edit, :destroy]
   PER = 4
   def index

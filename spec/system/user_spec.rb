@@ -35,6 +35,15 @@ RSpec.describe 'User registration, login and logout functions', type: :system do
         click_button 'Log in'
         expect(page).to have_content 'user@gmail.com'
       end
+      it 'When you are logged do not go to the user registration screen' do
+        visit new_session_path
+        fill_in 'session[email]', with: @user.email
+        fill_in 'session[password]', with: @user.password
+        click_button 'Log in'
+        visit new_user_path
+        expect(current_path).to eq user_path(@user.id)
+        expect(page).to have_content 'you are already logged'
+      end
       it 'A test that takes you to a task list page when you go to someone elses My Page' do
         visit new_session_path
         fill_in 'session[email]', with: @user.email
@@ -55,7 +64,7 @@ RSpec.describe 'User registration, login and logout functions', type: :system do
         page.accept_confirm do
           click_link 'logout'
         end
-        expect(current_path).to eq new_session_path
+        #expect(current_path).to eq new_session_path
         expect(page).to have_content 'good bye'
       end
     end
@@ -128,6 +137,30 @@ RSpec.describe 'User registration, login and logout functions', type: :system do
         click_button 'Update User'
         expect(page).to have_content 'user1'
       end
+      it 'Testing delete self admin.' do
+        visit new_session_path
+        fill_in 'session[email]', with: @admin_user.email
+        fill_in 'session[password]', with: @admin_user.password
+        click_button 'Log in'
+        visit admin_users_path
+        page.accept_confirm do
+          click_on 'destroy', match: :first
+        end
+        expect(page).to have_content 'you are currently the only administrator. Please choose another administrator before'
+      end
+      it 'Testing update role self admin.' do
+        visit new_session_path
+        fill_in 'session[email]', with: @admin_user.email
+        fill_in 'session[password]', with: @admin_user.password
+        click_button 'Log in'
+        visit edit_admin_user_path(@admin_user.id)
+        #binding.irb
+        find(:css, "#user_admin[value='true']").set(false)
+        fill_in 'user[password]', with: '000000'
+        fill_in 'user[password_confirmation]', with: '000000'
+        click_button 'Update User'
+        expect(page).to have_content 'true'
+      end
       it 'Testing that allows administrators to delete users.' do
         visit new_session_path
         fill_in 'session[email]', with: @admin_user.email
@@ -137,7 +170,7 @@ RSpec.describe 'User registration, login and logout functions', type: :system do
         page.accept_confirm do
           click_on 'destroy', match: :first
         end
-        expect(page).to have_content 'user are successfully destroy'
+        expect(page).to have_content 'you are currently the only administrator. Please choose another administrator before'
       end
     end
   end
