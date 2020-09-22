@@ -1,0 +1,33 @@
+<div class="user_top">
+  <%if logged_in? || current_user.id == @user.id %>
+  <div class="action">
+    <div class="left">
+      <span class=""><%=link_to "",edit_user_path(current_user.id),:class=>"fas fa-user-edit" %></span>
+      <span class=""><%=link_to " ",user_path(current_user.id),method: :delete, data: { confirm: 'Are you sure?'} ,:class=>"far fa-trash-alt" %></span>
+    </div>
+    <div class="right">
+      <%if current_user.admin? %>
+      <span class=""><%=link_to "users list",admin_users_path %></span>
+      <span class=""><%= link_to "create new user", new_admin_user_path %></span>
+      <%end%>
+    </div>
+  </div>
+  <%end%>
+  <h4><%= current_user.name %></h4>
+  <p><em><%= current_user.email %></em></p>
+  <%=link_to 'logout',session_path(current_user.id),method: :delete, data: { confirm: 'Are you sure?'} %>
+  <div class="search">
+    <%= form_with(url: tasks_path, method: :get, local: true) do |f| %>
+      <%= f.label(:name, 'name') %>
+      <%= f.text_field :name %>
+      <%= f.label:statut %>
+      <%= f.select :statut, [["not_started", 0 ], ["started", 1 ], ["completed", 2 ] ], include_blank: "veuillez choisir"%>
+      <%= f.hidden_field :search, value: 'true' %>
+      <%= f.submit'search',:class=>"btn btn-dark" %>
+    <% end %>
+  </div>
+  <span class="nav-top">
+    <span><%=link_to " deadline", tasks_path(sort_expired: "true"), :class=>"fas fa-sort-down"%></span>
+    <span><%=link_to " priority", tasks_path(sort_priority: "true"),:class=>"fas fa-sort-down"%></span>
+  </span>
+</div>

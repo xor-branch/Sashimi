@@ -1,0 +1,27 @@
+<div class="user_top">
+  <%if logged_in? || current_user.id == @user.id %>
+    <div class="action">
+      <div class="left">
+        <%if current_user.admin? %>
+        <span class=""><%=link_to "",edit_admin_user_path(@user.id),:class=>"fas fa-user-edit" %></span>
+        <%else%>
+          <span class=""><%=link_to "",edit_user_path(@user.id),:class=>"fas fa-user-edit" %></span>
+          <span class=""><%=link_to " ",user_path(@user.id),method: :delete, data: { confirm: 'Are you sure?'} ,:class=>"far fa-trash-alt" %></span>
+        <%end%>
+      </div>
+      <div class="right">
+        <%if current_user.admin? %>
+        <span class=""><%=link_to "users list",admin_users_path %></span>
+        <span class=""><%= link_to "create new user", new_admin_user_path %></span>
+        <%end%>
+      </div>
+    </div>
+  <%end%>
+  <div class="detail">
+    <br>
+    <h4><%= @user.name %></h4>
+    <p><em><%= @user.email %></em></p>
+    <%=link_to 'logout',session_path(current_user.id),method: :delete, data: { confirm: 'Are you sure?'} %>
+  </div>
+
+</div>

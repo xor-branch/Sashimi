@@ -1,10 +1,25 @@
-<%=render 'layouts/task'%>
+<div class="user_top">
+  <h4><%= current_user.name %></h4>
+  <p><em><%= current_user.email %></em></p>
+  <%if logged_in? || current_user.id == @user.id %>
+    <div class="action">
+      <div class="left">
+        <span class=""><%=link_to "#{current_user.name} task list",user_path(current_user.id) %></span>
+      </div>
+      <div class="right">
+        <%if current_user.admin? %>
+        <span class=""><%=link_to "user list",admin_users_path %></span>
+        <%end%>
+      </div>
+    </div>
+  <%end%>
+</div>
 <div class="container">
-<div class="show_content">
-  <h3><%=@task.name%></h3>
-  <p><%=@task.content%></p>
+  <div class="container show_content taskk_view">
+      <h3>name : <%=@task.name%></h3>
+    <p>détail :<%=@task.content%></p>
+
+    <span class="task_action"><%= link_to ' edit', edit_task_path(@task.id),:class=>"fas fa-pencil-alt" %></span>
+    <span class="task_action"><%= link_to ' delete', task_path(@task.id), method: :delete, data: { confirm: 'Are you sure?' },:class=>"far fa-trash-alt"%></span>
 </div>
-<span class="btn btn-info"><%=link_to "edit task", edit_task_path(@task.id),data: { confirm: 'sure to edit task?'}%></span>
-<span class="btn btn-danger" ><%=link_to "delete task", task_path(@task.id), method: :delete, data: { confirm:'sure to delete task?'}%></span>
-<span class="btn btn-danger" ><%=link_to "Validate", tasks_path%></span>
-</div>
+<%=render 'layouts/footer'%>

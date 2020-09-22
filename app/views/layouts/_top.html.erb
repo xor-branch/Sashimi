@@ -1,0 +1,16 @@
+<div class="content">
+  <h3>TASK LIST</h3>
+  <div class="search">
+    <%= form_with(url: tasks_path, method: :get, local: true) do |f| %>
+      <%= f.label(:name, 'name') %>
+      <%= f.text_field :name %>
+      <%= f.label:statut %>
+      <%= f.select :statut, [ ["not_started", 0 ], ["started", 1 ], ["completed", 2 ] ]%>
+      <%= f.submit'search',:class=>"btn btn-dark" %>
+    <% end %>
+  </div>
+  <span class="nav-top">
+    <span><%=link_to "Profil", user_path(current_user.id),:class=>"fas fa-home"%></span>
+    <span><%=link_to " Add new task", new_task_path,:class=>"fas fa-plus-square"%></span>
+  </span>
+</div>

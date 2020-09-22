@@ -1,0 +1,33 @@
+<div class="container ">
+  <% if @user.errors.any? %>
+   <div id="error_explanation">
+     <h2><%= pluralize(@user.errors.count, "error") %> prohibited this <%= @user.name %> from being saved:</h2>
+     <ul>
+      <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+     </ul>
+  </div>
+  <% end %>
+  <div class="container">
+   <%= form_with(model: @user, local: true) do |f| %>
+   <%= f.label :name, "your name" %>
+   <%= f.text_field :name,:class=>"form-control",
+                          :id=>"exampleInputEmail1" %>
+   <%= f.label :email %>
+   <%= f.email_field :email,:type=>"email",
+                           :class=>"form-control",
+                           :id=>"exampleInputEmail1" %>
+   <%= f.label :password %>
+   <%= f.password_field :password,:type=>"password",
+                           :class=>"form-control",
+                           :id=>"exampleInputPassword1" %>
+   <%= f.label :password_confirmation %>
+   <%= f.password_field :password_confirmation,:type=>"password",
+                           :class=>"form-control",
+                           :id=>"exampleInputPassword1" %>
+  <br>
+   <%= f.submit :class=>"btn btn-primary"%>
+   <% end %>
+   </div>
+</div>
