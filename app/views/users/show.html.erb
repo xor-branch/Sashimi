@@ -33,6 +33,7 @@
   <div class="label">
     <p><%current_user.labels.each do |label| %>
         <span > <%= label.name%></span>
+        <%= link_to "", edit_label_path(label.id),:class=>"fas fa-pencil-alt"%>
         <%= link_to "", label_path(label.id), method: :delete, data: { confirm: 'Are you sure?' },:class=>"fas fa-times trash"%>
         <span>--</span>
       <% end %>
