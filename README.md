@@ -31,19 +31,24 @@ has_many:tasks
 
 # Heroku deployement 
 "loggin to heroku"
+
 <code> $ heroku login</code>
 
 "conmpile the assets of projet, verify to be in the projet repositoring"
+
 <code>$ rails assets:precompile RAILS_ENV=production</code>
 
 "push the projet in github, verify the repositoring exist on github"
+
 <code> $ git add -A</code>
 <code> $ git commit -m "projet commit"</code>
 
 "create the application on heroku"
+
 <code>$ heroku create
   
 "Add Heroku build pack"
+
 <code>$ heroku buildpacks:set heroku/ruby</code>
 <code> $ heroku buildpacks:add --index 1 heroku/nodejs</code>
 
@@ -52,3 +57,15 @@ has_many:tasks
 
 "Migrate database"
 <code>$ heroku run rails db:migrate </code>
+
+##"Pour supprimer la base de données sur heroku, si vous utilisez SHARED_DATABASE_URL :"
+
+<code>$ heroku pg:reset DATABASE_URL</code>
+
+"Maintenant recréer la base de données avec rien en elle:"
+
+<code>$ heroku run rake db:migrate</code>  
+
+"peupler la base de données avec vos données de graine:"
+
+<code>$ heroku run rake db:seed</code>
