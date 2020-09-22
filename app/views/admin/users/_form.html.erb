@@ -10,7 +10,7 @@
   </div>
   <% end %>
   <div class="container">
-   <%= form_with(model: @user, local: true) do |f| %>
+   <%= form_with(model:[:admin, @user], local: true) do |f| %>
    <%= f.label :name, "your name" %>
    <%= f.text_field :name,:class=>"form-control",
                           :id=>"exampleInputEmail1" %>

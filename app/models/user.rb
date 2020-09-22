@@ -6,8 +6,8 @@ class User < ApplicationRecord
   validates :email, presence: true, length: { maximum: 255 }, uniqueness: true, on: :create,
                     format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
   before_validation { email.downcase! }
+
   has_secure_password
-  validates :password, presence: true, length: { minimum: 6 }
   has_many :tasks, dependent: :destroy
 
 
@@ -15,7 +15,7 @@ class User < ApplicationRecord
   def destroy_admin
     if User.where(admin: true).count == 1
       user = User.where(admin: true)
-      throw :abort if user[0] == self      
+      throw :abort if user[0] == self
     end
   end
 

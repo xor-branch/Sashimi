@@ -66,7 +66,7 @@ def check_admin
   end
 end
 def user_params
-  params.require(:user).permit(:name, :email, :password, :admin, :password_confirmation)
+  params.require(:user).permit(:name, :email, :admin, :password,  :password_confirmation)
 end
 def set_user
   @user = User.find(params[:id])

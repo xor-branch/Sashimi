@@ -14,7 +14,7 @@
       </div>
       <% end %>
       <div class="container">
-       <%= form_with(model: @user, local: true) do |f| %>
+       <%= form_with(model: [:admin, @user], local: true) do |f| %>
        <%= f.hidden_field :name,:class=>"form-control",
                               :id=>"exampleInputEmail1" %>
        <%= f.hidden_field :email,
@@ -23,10 +23,10 @@
        <%= f.label :admin %>
        <%= f.check_box :admin,{}, "true","false" %>
        <br>
-       <%= f.hidden_field :password,:value=>"#{@user.password_digest}",
+       <%= f.hidden_field :password,
                                :class=>"form-control",
                                :id=>"exampleInputPassword1" %>
-       <%= f.hidden_field :password_confirmation,:value=>"#{@user.password_digest}",
+       <%= f.hidden_field :password_confirmation,
                                :class=>"form-control",
                                :id=>"exampleInputPassword1" %>
       <br>
