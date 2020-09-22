@@ -1,9 +1,19 @@
-require 'rails_helper'
+#bundle exec rspec spec/system/task_spec.rb
 
+require 'rails_helper'
+require 'selenium-webdriver'
 RSpec.describe 'Task Management Function', type: :system do
   before do
-    FactoryBot.create(:task)
-    FactoryBot.create(:second_task)
+    @user =FactoryBot.create(:user)
+    @admin_user = FactoryBot.create(:admin_user)
+
+    @task1 = FactoryBot.create(:task, user:@user)
+    @task2 = FactoryBot.create(:second_task, user:@user)
+
+    visit new_session_path
+    fill_in 'session[email]', with: @user.email
+    fill_in 'session[password]', with: @user.password
+    click_button 'Log in'
   end
 
   describe 'Reordering by Priority' do
@@ -69,7 +79,7 @@ RSpec.describe 'Task Management Function', type: :system do
       it 'Tasks are arranged in descending order by end time' do
 
         visit tasks_path
-        click_on 'deadilne'
+        click_on 'deadline'
         task_list = all('.tbody tr')
         expect(page).to have_content 'Task2'
         expect(page).to have_content 'Task1'
@@ -122,8 +132,8 @@ RSpec.describe 'Task Management Function', type: :system do
   describe 'Task Details Screen' do
     context 'When you move to any task detail screen' do
       it 'You will be redirected to a page with the content of the relevant task.' do
-        task = FactoryBot.create(:task)
-        visit task_path(task.id)
+        @task1 = FactoryBot.create(:task, user:@user)
+        visit task_path(@task1.id)
         expect(page).to have_content 'Task1'
         expect(page).to have_content 'content1'
       end
