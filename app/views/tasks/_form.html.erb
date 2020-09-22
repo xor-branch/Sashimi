@@ -36,8 +36,11 @@
             <%= form.select(:priority, {low: 'low', medium: 'medium', high: 'high' }) %>
           </div>
           <br>
-          <div class="">
-
+          <div class="field">
+            <% current_user.labels.all.each do |label| %>
+              <%= form.check_box :label_ids, { multiple: true, checked: label[:checked], disabled: label[:disabled], include_hidden: false }, label[:id] %>
+              <label style="background-color: aquamarine"><%= label.name %></label>
+            <% end %>
           </div>
             <%= form.submit :class=>"btn btn-primary"%>
       <% end %>

@@ -15,6 +15,7 @@ class TasksController < ApplicationController
     else
       @tasks=current_user.tasks.all.order(created_at: :desc).page(params[:page]).per(4)
     end
+    @tasks = @tasks.joins(:labels).where(labels: { id: params[:label_id] }) if params[:label_id].present?
   end
   def new
     @task = Task.new
@@ -50,15 +51,15 @@ class TasksController < ApplicationController
   end
 private
   def task_params
-    params.require(:task).permit(:name,:content,:end_time,:statut, :priority)
+    params.require(:task).permit(:name,:content,:end_time,:statut, :priority , { label_ids: [] })
   end
   def set_task
     @task = Task.find(params[:id])
   end
-  def user_check
-    redirect_to tasks_path, notice:('access deny') unless current_user.id == @task.user_id || current_user.admin?
-  end
   def login_check
     redirect_to new_session_path, notice:('you are not login, please login or create new accompt') unless logged_in?
+  end
+  def user_check
+    redirect_to tasks_path, notice:('access deny') unless current_user.id == @task.user_id || current_user.admin?
   end
 end

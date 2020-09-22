@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only:[:show, :edit, :update, :destroy]
+  before_action :login_check, only:[:new, :index, :edit]
   before_action :user_check, only: [:index,:show,:edit, :update, :destroy]
-  before_action :login_check, only:[:new, :index]
 
   def index
   end
