@@ -26,6 +26,13 @@
       <%= f.submit'search',:class=>"btn btn-dark" %>
     <% end %>
   </div>
+  <div class="search">
+    <%= form_with(url: tasks_path, method: :get, local: true) do |f| %>
+      <%= f.label :labels, 'search by label'%>
+      <%= f.select("label_id", current_user.labels.pluck(:name, :id), {include_blank: true}) %>
+      <%= f.submit'Search', name: nil %>
+    <% end %>
+  </div>
   <span class="nav-top">
     <span><%=link_to " deadline", tasks_path(sort_expired: "true"), :class=>"fas fa-sort-down"%></span>
     <span><%=link_to " priority", tasks_path(sort_priority: "true"),:class=>"fas fa-sort-down"%></span>

@@ -1,0 +1,21 @@
+<div class="container ">
+  <% if @label.errors.any? %>
+   <div id="error_explanation">
+     <h2><%= pluralize(@label.errors.count, "error") %> prohibited this <%= @label.name %> from being saved:</h2>
+     <ul>
+      <% @label.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+     </ul>
+  </div>
+  <% end %>
+  <div class="container">
+   <%= form_with(model: @label, local: true) do |f| %>
+   <%= f.label :name, "label name" %>
+   <%= f.text_field :name,:class=>"form-control",
+                          :id=>"exampleInputEmail1" %>
+    <br>
+   <%= f.submit :class=>"btn btn-primary"%>
+   <% end %>
+   </div>
+</div>

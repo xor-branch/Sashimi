@@ -4,9 +4,10 @@
       <tr>
         <th>Name</th>
         <th>Content</th>
-        <th>end time</th>
+        <th>End time</th>
         <th>Priority</th>
         <th>Statut</th>
+        <th>labels</th>
         <th colspan="3"></th>
       </tr>
     </thead>
@@ -19,15 +20,30 @@
           <td class="date_row"><%= task.end_time %></td>
           <td class="priority_high"><%= task.priority %></td>
           <td><%= task.statut %></td>
+          <td><em><% task.labels.each do |label|%>
+                  <%= label.name%>,
+              <% end %>
+          </em></td>
           <td><%= link_to '', edit_task_path(task),:class=>"fas fa-pencil-alt" %></td>
           <td><%= link_to '', task, method: :delete, data: { confirm: 'Are you sure?' },:class=>"far fa-trash-alt"%></td>
           <% end %>
         </tr>
-        <tr>
-          <td class="add_task"><%=link_to "New task",new_task_path,:class=>"fas fa-folder-plus" %></td>
-        </tr>
-
     </tbody>
   </table>
-
+  <div class="label">
+    <p><%current_user.labels.each do |label| %>
+        <span > <%= label.name%></span>
+        <%= link_to "", edit_label_path(label.id),:class=>"fas fa-pencil-alt"%>
+        <%= link_to "", label_path(label.id), method: :delete, data: { confirm: 'Are you sure?' },:class=>"fas fa-times trash"%>
+        <span>--</span>
+      <% end %>
+      <% if current_user.labels.empty? %>
+      <span> <em > add label</em></span>
+      <% end %>
+      <%= link_to '', new_label_path,:class=>"fas fa-plus" %>
+    </p>
+  </div>
+  <div>
+    <td class="add_task"><%=link_to "New task",new_task_path,:class=>"fas fa-folder-plus" %></td>
+ </div>
 <%=render 'layouts/footer'%>

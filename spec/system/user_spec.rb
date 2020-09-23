@@ -130,14 +130,10 @@ RSpec.describe 'User registration, login and logout functions', type: :system do
         fill_in 'session[password]', with: @admin_user.password
         click_button 'Log in'
         visit edit_admin_user_path(@user.id)
-        fill_in 'user[name]', with: 'user1'
-        fill_in 'user[email]', with: 'user1@gmail.com'
-        fill_in 'user[password]', with: '111111'
-        fill_in 'user[password_confirmation]', with: '111111'
-        click_button 'Update User'
-        expect(page).to have_content 'user1'
+        find(:css, "#user_admin[value='true']").set(false)
+        expect(@user.admin?).to eq (false)
       end
-      it 'Testing delete self admin.' do
+      it 'Testing delete self admin if last admin' do
         visit new_session_path
         fill_in 'session[email]', with: @admin_user.email
         fill_in 'session[password]', with: @admin_user.password
@@ -148,7 +144,7 @@ RSpec.describe 'User registration, login and logout functions', type: :system do
         end
         expect(page).to have_content 'you are currently the only administrator. Please choose another administrator before'
       end
-      it 'Testing update role self admin.' do
+      it 'Testing update role self admin if last admin.' do
         visit new_session_path
         fill_in 'session[email]', with: @admin_user.email
         fill_in 'session[password]', with: @admin_user.password
@@ -156,10 +152,8 @@ RSpec.describe 'User registration, login and logout functions', type: :system do
         visit edit_admin_user_path(@admin_user.id)
         #binding.irb
         find(:css, "#user_admin[value='true']").set(false)
-        fill_in 'user[password]', with: '000000'
-        fill_in 'user[password_confirmation]', with: '000000'
         click_button 'Update User'
-        expect(page).to have_content 'true'
+        expect(page).to have_content 'you are currently the only administrator. Please choose another administrator before'
       end
       it 'Testing that allows administrators to delete users.' do
         visit new_session_path

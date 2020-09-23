@@ -55,6 +55,18 @@ footer {
 .loggin_form label{
   font-size: 10px;
 }
+.loggin_form span a{
+  font-size: 15px;
+  color: black;
+  background-color: #F1F4E8;
+  float: right;
+  position: relative;
+    bottom: 30px;
+    right: 30px;
+padding: 0px 10px 0px 10px;
+}
+
+
 .loggin_form select{
   font-size: 12px;
   border: 1px solid blue;
@@ -146,4 +158,12 @@ footer {
 }
 .nav-top {
   margin-left: 35%;
+}
+// show labels
+.label span{
+  background-color: #F1F4E8;
+}
+.label .trash{
+  color: red;
+  font-size: 12px;
 }

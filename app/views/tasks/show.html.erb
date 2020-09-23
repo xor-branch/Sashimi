@@ -17,9 +17,18 @@
 <div class="container">
   <div class="container show_content taskk_view">
       <h3>name : <%=@task.name%></h3>
-    <p>détail :<%=@task.content%></p>
+      <p>détail : <%=@task.content%></p>
+      <p>end time : <%=@task.end_time%></p>
+      <p>statut : <%=@task.statut%></p>
+      <p>priority : <%=@task.priority%></p>
+      <p><em>labels:<% @task.labels.each do |label|%>
+            <%= label.name%>,
+          <% end %>
+      </em></p>
+
 
     <span class="task_action"><%= link_to ' edit', edit_task_path(@task.id),:class=>"fas fa-pencil-alt" %></span>
     <span class="task_action"><%= link_to ' delete', task_path(@task.id), method: :delete, data: { confirm: 'Are you sure?' },:class=>"far fa-trash-alt"%></span>
+
 </div>
 <%=render 'layouts/footer'%>
