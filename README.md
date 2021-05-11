@@ -52,8 +52,20 @@ has_many:tasks
 <code>$ heroku buildpacks:set heroku/ruby</code>
 <code> $ heroku buildpacks:add --index 1 heroku/nodejs</code>
 
+<code> $ heroku stack:set heroku-18 </code>
+<code>  $ heroku stack </code>
+<code> $ rm Gemfile.lock </code>
+<code> gem install bundler -v 2.2.11  </code>
+<code> bundle exec bundle -v  </code>
+<code> $ bundler _2.2.11_ install  </code>
+<code> $ bundle lock --add-platform x86_64-linux  </code>
+<code> $ git add .  </code>
+<code> $ git commit -m 'Add platform'  </code>
+<code> $ git push heroku master  </code>
+
 "deply to heroku"
 <code>$ git push heroku master </code>
+
 
 "Migrate database"
 <code>$ heroku run rails db:migrate </code>
